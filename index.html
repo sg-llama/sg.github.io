@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sara Golino — Senior Product Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #102fb3;
+      --white:  #fdfaee;
+      --off:    #F5F5F3;
+      --mid:    #6B7280;
+      --accent: #2563EB;
+      --rule:   #E4E4E0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: var(--white);
+      color: #1a1a1a;
+      line-height: 1.65;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2.5rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    nav .wordmark {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+      letter-spacing: 0.01em;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--navy); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      padding: 8rem 2.5rem 5rem;
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .hero-body {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 560px;
+      margin-bottom: 3rem;
+      line-height: 1.75;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--navy);
+    }
+
+    .btn-primary:hover {
+      background: var(--off);
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.8);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    /* SECTION SHARED */
+    section {
+      padding: 6rem 2.5rem;
+    }
+
+    .section-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 3rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* ABOUT */
+    #about { background: var(--off); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-grid h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      line-height: 1.2;
+      color: var(--navy);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-grid p {
+      color: #444;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      color: #555;
+      text-transform: uppercase;
+    }
+
+    /* WORK */
+    #work { background: var(--white); }
+
+    .work-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .work-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+
+    .work-item:first-child { border-top: 1px solid var(--rule); }
+
+    .work-meta {
+      padding-top: 0.2rem;
+    }
+
+    .work-company {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .work-dates {
+      font-size: 0.72rem;
+      color: #bbb;
+      margin-top: 0.25rem;
+    }
+
+    .work-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .work-desc {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.65;
+    }
+
+    .work-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .work-tag {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem;
+      background: var(--off);
+      color: var(--mid);
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    /* TOOLS */
+    #tools { background: var(--navy); }
+
+    #tools .section-label { color: rgba(255,255,255,0.35); border-color: rgba(255,255,255,0.1); }
+
+    #tools h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--white);
+      margin-bottom: 3rem;
+      max-width: 560px;
+      line-height: 1.2;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .tool-card {
+      background: var(--navy);
+      padding: 1.75rem;
+      transition: background 0.2s;
+    }
+
+    .tool-card:hover { background: #162275; }
+
+    .tool-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .tool-desc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.55;
+    }
+
+    /* CONTACT */
+    #contact { background: var(--off); text-align: center; }
+
+    #contact h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    #contact p {
+      color: var(--mid);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      padding: 2rem 2.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .work-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      section { padding: 4rem 1.5rem; }
+      nav { padding: 1.25rem 1.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="wordmark">Sara Golino</span>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#tools">AI & Tools</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Senior Product Manager · Remote, London</p>
+      <h1>Product clarity<br>in <em>complex</em><br>environments.</h1>
+      <p class="hero-body">Calm, delivery-focused product leadership across complex, regulated, and ambiguous environments.
+      </p>
+      <div class="hero-links">
+        <a href="#work" class="btn btn-primary">See my work</a>
+        <a href="https://www.linkedin.com/in/saragolino/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <p class="section-label">About</p>
+      <div class="about-grid">
+        <div>
+          <h2>Delivery-focused. Domain-curious.</h2>
+          <p>I work best in environments where the problem is real, the stakeholders are senior, and the path forward isn't yet obvious. I've led products in heavily regulated settings — GDPR, HIPAA, RICS — and across teams ranging from global enterprises to early-stage startups.</p>
+          <p>I bring the same rigour to product strategy as to day-to-day delivery: from roadmap sessions with leadership to running discovery, research, experimentation, and QA.</p>
+          <p>While I don't come from an engineering background, I've spent much of my career on technical products, partnering closely with engineers to translate complex requirements into practical solutions.</p>
+        </div>
+        <div>
+          <h2>What I bring</h2>
+          <div class="tag-list">
+            <span class="tag">Product Strategy</span>
+            <span class="tag">Discovery & Research</span>
+            <span class="tag">Roadmapping</span>
+            <span class="tag">Stakeholder Management</span>
+            <span class="tag">A/B Testing</span>
+            <span class="tag">GDPR</span>
+            <span class="tag">HIPAA</span>
+            <span class="tag">RICS</span>
+            <span class="tag">Remote Teams</span>
+            <span class="tag">Agile / Scrum</span>
+            <span class="tag">B2B & B2C</span>
+            <span class="tag">AI Tooling</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-inner">
+      <p class="section-label">Selected Experience</p>
+      <div class="work-list">
+
+        <div class="work-item">
+          <div class="work-meta">
+            <div class="work-company">OpenSolar</div>
+            <div class="work-dates">Jan – Jun 2026</div>
+          </div>
+          <div>
+            <div class="work-title">Product Manager</div>
+            <p class="work-desc">Inherited an AI Lead Generation product mid-beta with low accuracy and almost no traction. Built a mini-roadmap to fix it — introduced fail-safes and shipped a mandatory design step that pushed accuracy from 30–40% to 80–90%, then closed 5 partner deals through direct go-to-market engagement. Also led MyEnergy, a new end-customer app, through 3 rounds of user testing including A/B testing.</p>
+            <div class="work-tags">
+              <span class="work-tag">Climate-tech</span>
+              <span class="work-tag">AI Products</span>
+              <span class="work-tag">B2B & B2C</span>
+              <span class="work-tag">User Research</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-meta">
+            <div class="work-company">Turner & Townsend</div>
+            <div class="work-dates">Nov 2024 – Dec 2025</div>
+          </div>
+          <div>
+            <div class="work-title">Senior Product Owner</div>
+            <p class="work-desc">Built a carbon calculator aligned to the new RICS methodology in 6 months. Cut Cost Planning load and export times by 40%. Launched 2 new benchmarking clubs, rebuilding the underlying security and anonymisation architecture before opening them to new members.</p>
+            <div class="work-tags">
+              <span class="work-tag">Construction</span>
+              <span class="work-tag">RICS</span>
+              <span class="work-tag">B2B SaaS</span>
+              <span class="work-tag">Performance</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-meta">
+            <div class="work-company">WithinHealth</div>
+            <div class="work-dates">Feb – Oct 2024</div>
+          </div>
+          <div>
+            <div class="work-title">Senior Technical Product Manager</div>
+            <p class="work-desc">Led product across an iOS app and custom EHR system in a HIPAA-regulated environment. Reworked clinical workflows cutting admin time by ~25%, and overhauled the delivery process to shave ~30% off feature lead time.</p>
+            <div class="work-tags">
+              <span class="work-tag">Health-tech</span>
+              <span class="work-tag">HIPAA</span>
+              <span class="work-tag">iOS</span>
+              <span class="work-tag">EHR</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-meta">
+            <div class="work-company">Unilever</div>
+            <div class="work-dates">Mar 2020 – Apr 2022</div>
+          </div>
+          <div>
+            <div class="work-title">Product Owner</div>
+            <p class="work-desc">Built the "5 Growth Fundamentals Dashboard" — the primary OKR and analytics tool for board-level decision making across global markets. Launched 3 global analytics products; 2 reached top 5 global usage. Ran a user research programme with 500+ participants and delivered a full product suite redesign in 4 months.</p>
+            <div class="work-tags">
+              <span class="work-tag">Analytics</span>
+              <span class="work-tag">Global</span>
+              <span class="work-tag">B2B</span>
+              <span class="work-tag">A/B Testing</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- AI & TOOLS -->
+  <section id="tools">
+    <div class="section-inner">
+      <p class="section-label">AI & Tools</p>
+      <h2>Integrating AI into how I work — not as a shortcut, but as a multiplier.</h2>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">Cursor</div>
+          <div class="tool-desc">Embedded into daily workflow for PRDs, tickets, and QA acceptance criteria — structured, repeatable output.</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">NotebookLM</div>
+          <div class="tool-desc">Used for research synthesis, competitor analysis, and sense-making across large document sets.</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">Claude</div>
+          <div class="tool-desc">Used for structured thinking, draft generation, and building lightweight product tools — including the prototypes on this site.</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">Figma & Miro</div>
+          <div class="tool-desc">Wireframing, flow mapping, and collaborative discovery sessions with design and engineering teams.</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">Lookback</div>
+          <div class="tool-desc">Moderated and unmoderated user testing sessions — synthesis fed directly into prioritised backlogs.</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">Jira, SQL & PowerBI</div>
+          <div class="tool-desc">Delivery tracking, data querying, and building dashboards that actually get used at board level.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-label">Contact</p>
+      <h2>Let's talk.</h2>
+      <p>Open to senior product roles — remote preferred. Based in Kingston upon Thames.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="mailto:sara.golino@yahoo.com" class="btn btn-primary" style="background:var(--navy);color:var(--white);">sara.golino@yahoo.com</a>
+        <a href="https://www.linkedin.com/in/saragolino/" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--navy);color:var(--white);">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Sara Golino · Senior Product Manager
+  </footer>
+
+</body>
+</html>
