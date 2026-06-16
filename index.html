@@ -9,8 +9,8 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:   #102fb3;
-      --white:  #fdfaee;
+      --navy:   #0D1F5C;
+      --white:  #FFFFFF;
       --off:    #F5F5F3;
       --mid:    #6B7280;
       --accent: #2563EB;
@@ -278,6 +278,89 @@
       text-transform: uppercase;
     }
 
+    /* PROTOTYPES */
+    #prototypes { background: var(--off); }
+
+    #prototypes h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    #prototypes .section-intro {
+      font-size: 0.9rem;
+      color: var(--mid);
+      margin-bottom: 3rem;
+      max-width: 520px;
+      line-height: 1.65;
+    }
+
+    .proto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .proto-card {
+      background: var(--white);
+      padding: 1.75rem;
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .proto-card:hover { background: #FAFAF8; }
+
+    .proto-type {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+    }
+
+    .proto-type.work {
+      color: var(--navy);
+      background: #EEF2FF;
+    }
+
+    .proto-type.fun {
+      color: #92400E;
+      background: #FEF3C7;
+    }
+
+    .proto-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .proto-desc {
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .proto-arrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+    }
+
     /* TOOLS */
     #tools { background: var(--navy); }
 
@@ -352,6 +435,7 @@
       nav ul { display: none; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .work-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .proto-grid { grid-template-columns: 1fr; }
       section { padding: 4rem 1.5rem; }
       nav { padding: 1.25rem 1.5rem; }
     }
@@ -368,6 +452,7 @@
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
+      <li><a href="#prototypes">Prototypes</a></li>
       <li><a href="#tools">AI & Tools</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -376,9 +461,10 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
-      <p class="hero-eyebrow">Senior Product Manager · Remote, London</p>
+      <p class="hero-eyebrow">Senior Product Manager · London → Glasgow</p>
       <h1>Product clarity<br>in <em>complex</em><br>environments.</h1>
-      <p class="hero-body">Calm, delivery-focused product leadership across complex, regulated, and ambiguous environments.
+      <p class="hero-body">
+        8+ years shipping B2B and B2C products across climate-tech, health-tech, construction, analytics, and media. Comfortable where the brief is incomplete and the stakes are real.
       </p>
       <div class="hero-links">
         <a href="#work" class="btn btn-primary">See my work</a>
@@ -497,6 +583,53 @@
     </div>
   </section>
 
+  <!-- PROTOTYPES -->
+  <section id="prototypes">
+    <div class="section-inner">
+      <p class="section-label">Prototypes</p>
+      <h2>Built with Claude. Powered by the Anthropic API.</h2>
+      <p class="section-intro">A mix of work tools and personal projects — all built to show how I integrate AI into product thinking and day-to-day workflow.</p>
+      <div class="proto-grid">
+
+        <a href="research-synthesis.html" class="proto-card">
+          <span class="proto-type work">Work tool</span>
+          <div class="proto-title">Research Synthesis</div>
+          <p class="proto-desc">Paste raw interview notes or survey responses and get back structured findings: themes, pain points, opportunities, and next steps.</p>
+          <span class="proto-arrow">Try it →</span>
+        </a>
+
+        <a href="feature-prioritisation.html" class="proto-card">
+          <span class="proto-type work">Work tool</span>
+          <div class="proto-title">Feature Prioritisation</div>
+          <p class="proto-desc">Add features, score them on impact, effort, and confidence, then get a ranked output using RICE, MoSCoW, or Value vs Effort.</p>
+          <span class="proto-arrow">Try it →</span>
+        </a>
+
+        <a href="prd-generator.html" class="proto-card">
+          <span class="proto-type work">Work tool</span>
+          <div class="proto-title">PRD Generator</div>
+          <p class="proto-desc">Answer four sets of questions about a feature and get a ready-to-share Product Requirements Document — tailored to your audience and detail level.</p>
+          <span class="proto-arrow">Try it →</span>
+        </a>
+
+        <a href="bird-quiz.html" class="proto-card">
+          <span class="proto-type fun">Just for fun</span>
+          <div class="proto-title">Bird ID Quiz</div>
+          <p class="proto-desc">Read the clues, identify the species. Fresh questions every time across UK, Europe, North America, and the Mediterranean. Three difficulty levels.</p>
+          <span class="proto-arrow">Try it →</span>
+        </a>
+
+        <a href="godzilla.html" class="proto-card">
+          <span class="proto-type fun">Just for fun</span>
+          <div class="proto-title">Godzilla Facts</div>
+          <p class="proto-desc">70 years of atomic destruction and surprisingly moving cinema. Filter by era and category, and summon a fact worth knowing.</p>
+          <span class="proto-arrow">Try it →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
   <!-- AI & TOOLS -->
   <section id="tools">
     <div class="section-inner">
@@ -536,7 +669,7 @@
     <div class="section-inner">
       <p class="section-label">Contact</p>
       <h2>Let's talk.</h2>
-      <p>Open to senior product roles — remote preferred. Based in Kingston upon Thames.</p>
+      <p>Open to senior product roles — remote preferred. Based in Glasgow from July 2026.</p>
       <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
         <a href="mailto:sara.golino@yahoo.com" class="btn btn-primary" style="background:var(--navy);color:var(--white);">sara.golino@yahoo.com</a>
         <a href="https://www.linkedin.com/in/saragolino/" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--navy);color:var(--white);">LinkedIn</a>
