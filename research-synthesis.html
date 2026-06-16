@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Synthesis — Sara Golino</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:  #0D1F5C;
+      --white: #FFFFFF;
+      --off:   #F5F5F3;
+      --mid:   #6B7280;
+      --rule:  #E4E4E0;
+      --green: #16A34A;
+      --red:   #DC2626;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: var(--off);
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--navy);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      font-family: 'DM Serif Display', serif;
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    nav span {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    /* HEADER */
+    .header {
+      margin-bottom: 2.5rem;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--mid);
+      max-width: 520px;
+      line-height: 1.65;
+    }
+
+    /* FORM CARD */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .field-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .field-hint {
+      font-size: 0.78rem;
+      color: var(--mid);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    textarea {
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: #1a1a1a;
+      background: var(--off);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 0.875rem 1rem;
+      resize: vertical;
+      line-height: 1.65;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    textarea:focus { border-color: var(--navy); }
+
+    .options-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .field-group { display: flex; flex-direction: column; }
+
+    select {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: #1a1a1a;
+      background: var(--off);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 0.75rem 1rem;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    select:focus { border-color: var(--navy); }
+
+    /* BUTTON */
+    .btn-run {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 2px;
+      padding: 0.875rem 2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      margin-top: 1.5rem;
+    }
+
+    .btn-run:hover { opacity: 0.85; }
+    .btn-run:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* SPINNER */
+    .spinner {
+      width: 14px; height: 14px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* OUTPUT */
+    .output-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      overflow: hidden;
+      display: none;
+    }
+
+    .output-header {
+      background: var(--navy);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .output-header span {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .btn-copy {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.8);
+      border-radius: 2px;
+      padding: 0.35rem 0.9rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-copy:hover { border-color: white; color: white; }
+
+    .output-body {
+      padding: 2rem;
+    }
+
+    /* INSIGHT BLOCKS */
+    .insight-section {
+      margin-bottom: 2rem;
+    }
+
+    .insight-section:last-child { margin-bottom: 0; }
+
+    .insight-title {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1rem;
+    }
+
+    .insight-content {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #333;
+      white-space: pre-wrap;
+    }
+
+    /* ERROR */
+    .error-msg {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      border-radius: 2px;
+      padding: 1rem 1.25rem;
+      font-size: 0.85rem;
+      color: var(--red);
+      margin-top: 1rem;
+      display: none;
+    }
+
+    /* EXAMPLE TOGGLE */
+    .example-link {
+      font-size: 0.78rem;
+      color: var(--navy);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+
+    @media (max-width: 600px) {
+      .options-row { grid-template-columns: 1fr; }
+      .container { padding: 2rem 1.25rem 4rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .spinner { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Sara Golino</a>
+  <span>Research Synthesis</span>
+</nav>
+
+<div class="container">
+
+  <div class="header">
+    <p class="eyebrow">Prototype · User Research</p>
+    <h1>Research Synthesis Tool</h1>
+    <p class="subtitle">Paste in raw notes from user interviews, usability sessions, or surveys. Get back structured findings: themes, pain points, opportunities, and recommended next steps.</p>
+  </div>
+
+  <div class="card">
+    <label class="field-label" for="notes">Raw research notes</label>
+    <p class="field-hint">Paste notes from interviews, session recordings, survey responses, or any unstructured research input. The messier, the better.</p>
+    <textarea id="notes" rows="10" placeholder="e.g. User 1 — struggled to find the export button, said 'I never know where things are'. Took 3 minutes to complete the task. User 2 — completed task quickly but complained the confirmation email was confusing..."></textarea>
+    <span class="example-link" onclick="loadExample()">Load an example</span>
+
+    <div class="options-row">
+      <div class="field-group">
+        <label class="field-label" for="context">Product context <span style="font-weight:300;text-transform:none;letter-spacing:0">(optional)</span></label>
+        <p class="field-hint">What product or feature is this research about?</p>
+        <textarea id="context" rows="3" placeholder="e.g. A new onboarding flow for a B2B SaaS dashboard. We're trying to reduce time-to-first-value."></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="format">Output format</label>
+        <p class="field-hint">How should findings be structured?</p>
+        <select id="format">
+          <option value="full">Full synthesis (themes, pains, opportunities, next steps)</option>
+          <option value="themes">Themes only</option>
+          <option value="pains">Pain points and quotes</option>
+          <option value="backlog">Backlog-ready insight cards</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn-run" id="runBtn" onclick="synthesise()">
+      <span class="spinner" id="spinner"></span>
+      <span id="btnLabel">Synthesise findings</span>
+    </button>
+
+    <div class="error-msg" id="errorMsg"></div>
+  </div>
+
+  <div class="output-card" id="outputCard">
+    <div class="output-header">
+      <span>Synthesised findings</span>
+      <button class="btn-copy" onclick="copyOutput()">Copy</button>
+    </div>
+    <div class="output-body">
+      <div class="insight-content" id="outputContent"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function loadExample() {
+    document.getElementById('notes').value = `User 1 (Sarah, 34, marketing manager):
+- Struggled to find the export button — spent 4 minutes searching
+- "I never know where things are in this tool"
+- Eventually found it under Settings, not where she expected (top nav)
+- Liked the new dashboard layout overall, found it "much cleaner"
+- Confused by the difference between "Save draft" and "Publish" — saved draft by accident twice
+- Would use the tool daily if the export was easier
+
+User 2 (Tom, 28, analyst):
+- Completed the export task in under 1 minute — already knew where it was from old UI
+- Said the confirmation email after export is confusing: "It says 'your request is processing' but I don't know if that means minutes or hours"
+- Noticed the new filters but didn't try them — "I'll use them eventually but didn't need to today"
+- Suggested a notification when the export is ready
+
+User 3 (Priya, 41, head of ops):
+- Couldn't complete the task — gave up after 6 minutes
+- "Where is the export? This is the third time I've looked for this"
+- Found the new left-hand navigation confusing: "Too many items, I don't know what half of these do"
+- Strong request for a search bar in the nav
+- Said she'd been using a workaround (downloading raw CSV) for the past month`;
+
+    document.getElementById('context').value = 'Export feature in a B2B analytics dashboard. We redesigned the navigation in the last sprint and want to understand usability impact.';
+  }
+
+  async function synthesise() {
+    const notes = document.getElementById('notes').value.trim();
+    const context = document.getElementById('context').value.trim();
+    const format = document.getElementById('format').value;
+
+    if (!notes) {
+      showError('Please paste in some research notes first.');
+      return;
+    }
+
+    const btn = document.getElementById('runBtn');
+    const spinner = document.getElementById('spinner');
+    const btnLabel = document.getElementById('btnLabel');
+    const errorMsg = document.getElementById('errorMsg');
+    const outputCard = document.getElementById('outputCard');
+
+    btn.disabled = true;
+    spinner.style.display = 'block';
+    btnLabel.textContent = 'Synthesising...';
+    errorMsg.style.display = 'none';
+    outputCard.style.display = 'none';
+
+    const formatInstructions = {
+      full: `Produce a full research synthesis with clearly labelled sections:
+1. KEY THEMES (3–5 themes with supporting evidence)
+2. PAIN POINTS (specific friction, with participant references where relevant)
+3. OPPORTUNITIES (actionable insights the team could act on)
+4. RECOMMENDED NEXT STEPS (prioritised, concrete actions)`,
+      themes: `Identify and describe 3–6 key themes from the research. For each theme, name it clearly, describe it in 2–3 sentences, and cite supporting evidence from the notes.`,
+      pains: `Extract all pain points from the research. For each one, describe the pain clearly and include any direct quotes or specific participant references that illustrate it.`,
+      backlog: `Turn the research findings into backlog-ready insight cards. For each insight, write:
+- INSIGHT: one clear sentence describing what you found
+- EVIDENCE: which participants or data points support it
+- SUGGESTED ACTION: one concrete thing the team could do about it
+- PRIORITY: High / Medium / Low based on frequency and severity`
+    };
+
+    const systemPrompt = `You are a senior UX researcher helping a product manager synthesise user research. 
+Your output is structured, specific, and actionable — written for a product team, not an academic audience.
+Be direct. Use plain language. Reference specific participants or data points where they exist in the notes.
+Do not pad the output. Do not add a preamble. Start directly with the structured findings.`;
+
+    const userPrompt = `${context ? `PRODUCT CONTEXT:\n${context}\n\n` : ''}RAW RESEARCH NOTES:\n${notes}\n\n${formatInstructions[format]}`;
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1000,
+          system: systemPrompt,
+          messages: [{ role: 'user', content: userPrompt }]
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error?.message || 'Something went wrong. Please try again.');
+      }
+
+      const text = data.content?.find(b => b.type === 'text')?.text || '';
+      document.getElementById('outputContent').textContent = text;
+      outputCard.style.display = 'block';
+      outputCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    } catch (err) {
+      showError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      btn.disabled = false;
+      spinner.style.display = 'none';
+      btnLabel.textContent = 'Synthesise findings';
+    }
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('errorMsg');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  function copyOutput() {
+    const text = document.getElementById('outputContent').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.btn-copy');
+      btn.textContent = 'Copied';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
